@@ -2,11 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Profile;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class MeResource extends JsonResource
 {
     public function toArray($request): array
     {

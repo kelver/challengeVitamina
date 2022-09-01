@@ -13,13 +13,6 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    public function verifylink(Request $request)
-    {
-        $user = User::where('link_indication', $request->link)->first();
-
-        return new UserResource($user);
-    }
-
     public function register (Request $request, User $user): JsonResponse
     {
         $request->validate([
@@ -29,12 +22,6 @@ class RegisterController extends Controller
 
         $userData = $request->only('name', 'email', 'password');
         $userData['password'] = Hash::make($userData['password']);
-        $userData['token_verify'] = generateToken();
-        $userData['token_validate'] = Carbon::now()->addHours(24);
-
-        if($request->has('indicator')){
-            $userData['indicator'] = User::where('uuid', $userData['indicator'])->first()->id;
-        }
 
         if(!$user = $user->create($userData))
             abort(403, 'Erro ao criar novo usuário.');
