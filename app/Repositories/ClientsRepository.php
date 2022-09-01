@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repositories;
 
 use App\Models\Client;
@@ -21,7 +23,7 @@ class ClientsRepository
     public function searchClients($search)
     {
         return $this->model
-                    ->where(function($q) use ($search){
+                    ->where(function ($q) use ($search) {
                         $q->where('name', 'like', "%{$search}%")
                             ->orWhere('email', 'like', "%{$search}%");
                     })

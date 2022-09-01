@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repositories;
 
 use App\Models\Product;
@@ -21,7 +23,7 @@ class ProductsRepository
     public function searchProducts($search)
     {
         return $this->model
-                    ->where(function($q) use ($search){
+                    ->where(function ($q) use ($search) {
                         $q->where('name', 'like', "%{$search}%")
                             ->orWhere('description', 'like', "%{$search}%");
                     })
@@ -40,7 +42,7 @@ class ProductsRepository
                     ->where('uuid', $identify)
                     ->first();
 
-        if(!$product){
+        if (! $product) {
             abort(404, 'Produto não encontrado.');
         }
 

@@ -1,9 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
-use App\Models\Books;
-use App\Repositories\BooksRepository;
 use App\Repositories\OportunitiesRepository;
 
 class OportunitiesService
@@ -15,9 +15,9 @@ class OportunitiesService
         $this->repository = $oportunitiesRepository;
     }
 
-    public function validateOportunityStatus ($status)
+    public function validateOportunityStatus($status)
     {
-        if(!in_array($status, ['open', 'accept', 'lost'])){
+        if (! in_array($status, ['open', 'accept', 'lost'])) {
             abort(400, 'Status inválido.');
         }
     }
@@ -35,6 +35,7 @@ class OportunitiesService
     public function storeNewOportunity(array $data)
     {
         $this->validateOportunityStatus($data['status']);
+
         return $this->repository->storeNewOportunity($data);
     }
 
@@ -51,6 +52,7 @@ class OportunitiesService
     public function updateOportunity(string $identify, array $data)
     {
         $this->validateOportunityStatus($data['status']);
+
         return $this->repository->updateOportunity($identify, $data);
     }
 }

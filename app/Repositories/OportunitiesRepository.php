@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Repositories;
+declare(strict_types=1);
 
+namespace App\Repositories;
 
 use App\Models\Client;
 use App\Models\Oportunity;
@@ -17,11 +18,13 @@ class OportunitiesRepository
         $this->model = $oportunity;
     }
 
-    public function getClientId($identify){
+    public function getClientId($identify)
+    {
         return Client::where('uuid', $identify)->first()->id;
     }
 
-    public function getProductId($identify){
+    public function getProductId($identify)
+    {
         return Product::where('uuid', $identify)->first()->id;
     }
 
@@ -34,10 +37,10 @@ class OportunitiesRepository
                 $query->where('status', request()->status);
             })
             ->when(request()->has('valid'), function ($query) {
-                if(request()->has('valid') == 'true') {
+                if (request()->valid === 'true') {
                     $query->where('valid_at', '>=', Carbon::now());
                 }
-                if(request()->has('valid') == 'false') {
+                if (request()->valid === 'false') {
                     $query->where('valid_at', '<', Carbon::now());
                 }
             })
@@ -62,7 +65,7 @@ class OportunitiesRepository
             ->where('uuid', $identify)
             ->first();
 
-        if(!$oportunity){
+        if (! $oportunity) {
             abort(404, 'Oportunidade não encontrada.');
         }
 

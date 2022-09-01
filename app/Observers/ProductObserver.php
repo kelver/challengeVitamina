@@ -1,15 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Observers;
 
-use App\Models\Books;
 use App\Models\Product;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ProductObserver
 {
-    public function creating(Product $product)
+    public function creating(Product $product): void
     {
         $product->uuid = (string) Str::uuid();
     }
