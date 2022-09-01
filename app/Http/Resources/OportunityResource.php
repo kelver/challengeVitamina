@@ -16,6 +16,7 @@ class OportunityResource extends JsonResource
             'seller' => $this->when($this->user, $this->user),
             'product' => $this->when($this->product, $this->product),
             'status' => $this->status,
+            'is_valid' => Carbon::parse($this->valid_at)->isAfter(Carbon::now()),
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d \a\t H:i:s')
         ];
     }

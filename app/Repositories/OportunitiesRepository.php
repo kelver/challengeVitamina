@@ -6,6 +6,7 @@ namespace App\Repositories;
 use App\Models\Client;
 use App\Models\Oportunity;
 use App\Models\Product;
+use Carbon\Carbon;
 
 class OportunitiesRepository
 {
@@ -28,14 +29,20 @@ class OportunitiesRepository
     {
         return $this->model
             ->where('user_id', auth()->id())
-            ->with('client', 'user', 'product')->orderByDesc('id')->paginate(6);
-    }
-
-    public function searchOportunities($search)
-    {
-        return $this->model->with('client', 'user', 'product')
-                    ->orderByDesc('id')
-                    ->paginate(6);
+            ->with('client', 'user', 'product')
+            ->when(request()->has('status'), function ($query) {
+                $query->where('status', request()->status);
+            })
+            ->when(request()->has('valid'), function ($query) {
+                if(request()->has('valid') == 'true') {
+                    $query->where('valid_at', '>=', Carbon::now());
+                }
+                if(request()->has('valid') == 'false') {
+                    $query->where('valid_at', '<', Carbon::now());
+                }
+            })
+            ->orderByDesc('id')
+            ->paginate(6);
     }
 
     public function storeNewOportunity(array $data)

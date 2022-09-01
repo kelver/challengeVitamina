@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->bigInteger('product_id')->unsigned();
             $table->enum('status', ['open', 'accept', 'lost'])->default('open');
+            $table->dateTime('valid_at')->default(\Carbon\Carbon::now()->addHour(24));
             $table->timestamps();
             $table->foreign('client_id')->references('id')->on('clients');
             $table->foreign('user_id')->references('id')->on('users');
