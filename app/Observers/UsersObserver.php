@@ -16,9 +16,7 @@ class UsersObserver
     public function creating(User $user)
     {
         $uuid = (string) Str::uuid();
-        addPontuation('register');
 
         $user->uuid = $uuid;
-        $user->link_indication = $uuid;
     }
 }

@@ -2,19 +2,25 @@
 
 namespace App\Providers;
 
+use App\Models\Client;
 use App\Models\Company;
 use App\Models\CompliantHistory;
 use App\Models\CompliantUser;
 use App\Models\Documents;
+use App\Models\Oportunity;
+use App\Models\Product;
 use App\Models\Topic;
 use App\Models\TopicComments;
 use App\Models\TopicEvaluate;
 use App\Models\TopicFavorite;
 use App\Models\User;
+use App\Observers\ClientObserver;
 use App\Observers\CompanyObserver;
 use App\Observers\CompliantHistoryObserver;
 use App\Observers\CompliantUsersObserver;
 use App\Observers\DocumentsObserver;
+use App\Observers\OportunityObserver;
+use App\Observers\ProductObserver;
 use App\Observers\TopicCommentsObserver;
 use App\Observers\TopicsEvaluateObserver;
 use App\Observers\TopicsFavoriteObserver;
@@ -45,6 +51,9 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         User::observe(UsersObserver::class);
+        Product::observe(ProductObserver::class);
+        Client::observe(ClientObserver::class);
+        Oportunity::observe(OportunityObserver::class);
     }
 
     /**
