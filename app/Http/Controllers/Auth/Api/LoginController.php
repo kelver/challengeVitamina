@@ -20,7 +20,7 @@ class LoginController extends Controller
             abort(401, 'Invalid Credentials.');
         }
 
-        $token = auth()->user()->createToken(auth()->id());
+        $token = auth()->user()->createToken(auth()->user()->email);
 
         return response()
                 ->json([

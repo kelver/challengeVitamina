@@ -17,7 +17,7 @@ class ClientsRepository
 
     public function getClients()
     {
-        return $this->model->orderByDesc('id')->paginate(6);
+        return $this->model->orderByDesc('id')->get();
     }
 
     public function searchClients($search)

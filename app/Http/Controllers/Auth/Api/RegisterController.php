@@ -16,6 +16,7 @@ class RegisterController extends Controller
     public function register(Request $request, User $user): JsonResponse
     {
         $request->validate([
+            'name' => 'required|min:3',
             'password' => 'required|confirmed|min:6',
             'email' => 'required|string|email|max:255|unique:users',
         ]);
@@ -23,7 +24,7 @@ class RegisterController extends Controller
         $userData = $request->only('name', 'email', 'password');
         $userData['password'] = Hash::make($userData['password']);
 
-        if (! $user = $user->create($userData)) {
+        if (!$user = $user->create($userData)) {
             abort(403, 'Erro ao criar novo usuário.');
         }
 
@@ -32,13 +33,11 @@ class RegisterController extends Controller
             'password' => $request->password,
         ];
 
-        if (! auth()->attempt($credentials)) {
+        if (!auth()->attempt($credentials)) {
             abort(401, 'Credenciais inválidas.');
         }
 
-        $token = auth()->user()->createToken($user->id);
-
-        event(new Registered($user));
+        $token = auth()->user()->createToken($user->email);
 
         return response()
             ->json([

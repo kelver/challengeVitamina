@@ -33,16 +33,14 @@ class OportunitiesRepository
         return $this->model
             ->where('user_id', auth()->id())
             ->with('client', 'user', 'product')
+            ->when(request()->has('client'), function ($query) {
+                $query->where('client_id', $this->getClientId(request()->client));
+            })
             ->when(request()->has('status'), function ($query) {
                 $query->where('status', request()->status);
             })
-            ->when(request()->has('valid'), function ($query) {
-                if (request()->valid === 'true') {
-                    $query->where('valid_at', '>=', Carbon::now());
-                }
-                if (request()->valid === 'false') {
-                    $query->where('valid_at', '<', Carbon::now());
-                }
+            ->when(request()->has('date'), function ($query) {
+                $query->whereDate('created_at', '=', Carbon::createFromFormat('d/m/Y', request()->date)->format('Y-m-d'));
             })
             ->orderByDesc('id')
             ->paginate(6);
@@ -81,8 +79,9 @@ class OportunitiesRepository
     {
         $oportunity = $this->getOportunity($identify);
 
-        $data['client_id'] = $data['client_identify'] ? $this->getClientId($data['client_identify']) : $oportunity->client_id;
-        $data['product_id'] = $data['product_identify'] ? $this->getProductId($data['product_identify']) :
+        $data['client_id'] = isset($data['client_identify']) ? $this->getClientId($data['client_identify']) :
+        $oportunity->client_id;
+        $data['product_id'] = isset($data['product_identify']) ? $this->getProductId($data['product_identify']) :
             $oportunity->product_id;
 
         return $oportunity->update($data);

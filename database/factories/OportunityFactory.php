@@ -20,6 +20,7 @@ class OportunityFactory extends Factory
             'user_id'        => User::all()->random(1)->first()->id,
             'product_id'     => Product::all()->random(1)->first()->id,
             'status'         => $status[array_rand($status)],
+            'created_at'     => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

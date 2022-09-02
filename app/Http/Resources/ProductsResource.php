@@ -21,7 +21,7 @@ class ProductsResource extends JsonResource
             'identify' => $this->uuid,
             'name' => $this->name,
             'description' => $this->description,
-            'price' => 'R$ '.number_format($this->price, 2, ',', '.'),
+            'price' => 'R$ '.number_format((float) $this->price, 2, ',', '.'),
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d \a\t H:i:s'),
         ];
     }
