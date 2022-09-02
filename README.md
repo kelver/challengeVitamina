@@ -1,64 +1,64 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### Teste técnico aplicado para vaga FullStack Pleno.
 
-## About Laravel
+Empresa: Vitamina Web
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+----------
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Início
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Instalação
 
-## Learning Laravel
+Clone o repositório
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    git clone https://github.com/kelver/challengeVitamina.git
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Acesse a pasta do projeto
 
-## Laravel Sponsors
+    cd ./challengeVitamina
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Instale todas as dependências com o composer
 
-### Premium Partners
+    composer install
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Copie o arquivo .env.example e faça as configurações de banco de dados necessárias.
 
-## Contributing
+    cp .env.example .env
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Gere uma nova chave de aplicação
 
-## Code of Conduct
+    php artisan key:generate
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Execute as migrations para criar as tabelas no banco de dados. (**Necessário configuração do arquivo .env antes de executar as migrations**)
 
-## Security Vulnerabilities
+    php artisan migrate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Execute as seeders nas factories para criar os registros fakes para testes.
 
-## License
+    php artisan db:seed
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Pode executar o servidor embutido, ou utilizar um servidor local como preferir.
+
+    php artisan serve
+
+Caso tenha usado o servidor embutido, pode acessar a api http://localhost:8000/api
+
+Se tudo estiver ok, você deve ver uma mensagem na tela acessando a rota acima:
+
+![01-vitamina](https://user-images.githubusercontent.com/22528943/188158708-23ac7573-e071-435f-bac6-7937bdd39224.png)
+
+## Especificações da API
+
+Um workspace no postman, está público com as rotas e enviroments locais para testes no link abaixo:
+
+> [Postman Collection](https://www.postman.com/apiteiia/workspace/vitaminaapi)
+
+![02-vitamina](https://user-images.githubusercontent.com/22528943/188160323-a03641df-83f4-45d5-8d21-f92547c41bb4.png)
+
+Na imagem, na indicação verde, consta o enviroment citado, na indicação em amarelo, as rotas públicas e autenticadas 
+da api.
+
+Mais informações e detalhes, estou a disposição.
+
+----------
